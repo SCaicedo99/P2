@@ -123,5 +123,5 @@ if __name__ == '__main__':
     artistGraph = ArtistConnections()
 
     # print(artistGraph.load_graph("TenKsongs_proj2"))
-    print(artistGraph.load_graph("TestingSongs"))
-    print(artistGraph.search_artist("Mariah Carey"))
+    # print(artistGraph.load_graph("TestingSongs"))
+    # print(artistGraph.search_artist("Mariah Carey"))

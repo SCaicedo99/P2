@@ -16,7 +16,7 @@ class Vertex:
             self.coArtists[nbr] = 1
 
     def __str__(self):
-        return str(self.id) + ' connectedTo: ' + str([x.id for x in self.coArtists])
+        return str(self.id)# + ' connectedTo: ' + str([x.id for x in self.coArtists])
 
     def getConnections(self):
         return self.coArtists.keys()

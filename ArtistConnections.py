@@ -1,10 +1,10 @@
 import random
-from Graph import Vertex
+from Graph import Vertex, Graph
 
 class ArtistConnections:
 
     def __init__(self):
-        self.vertList = {}
+        self.vertList = Graph()
         self.numVertices = 0
         self.nb0 = 0
         self.artist = 0
@@ -51,11 +51,12 @@ class ArtistConnections:
         for nB in neighbors:
             # print("now working on nb: " + str(nb))
             if nB in self.vertList:
-                nB = self.vertList[nB]
+                nB = self.vertList.getVertex(nB)
                 self.repNb += 1  # this should add 1 per repeated neighbor, for testing purposes
             else:  # if the coArtists doesn't exist already in the self.vertList, then add a new vertex
-                nB = self.vertList[nB] = Vertex(nB)
+                nB = self.vertList.addVertex(nB)
                 self.nb0 += 1  # this adds 1 per new new neighbor, or coArtist
+                self.numVertices += 1
             nB.addSong(song)
 
         # insert the record to graph
@@ -63,10 +64,10 @@ class ArtistConnections:
         # insert vertex for this artist
 
         if artist in self.vertList: # this checks if the main artist already exists in the vertList
-            currentVert = self.vertList[artist]
+            currentVert = self.vertList.getVertex(artist)
             self.repArt += 1  # this should add 1 for repeated main Artists, for testing purposes
         else:
-            currentVert = self.vertList[artist] = Vertex(artist)
+            currentVert = self.vertList.addVertex(artist)
             self.artist += 1  # add 1 to the number of main artist.
             self.numVertices += 1
 
@@ -142,10 +143,6 @@ class ArtistConnections:
 if __name__ == '__main__':
     artistGraph = ArtistConnections()
 
-    # print(artistGraph.load_graph("TenKsongs_proj2"))
-    print(artistGraph.load_graph("TestingSongs"))
+    print(artistGraph.load_graph("TenKsongs_proj2"))
+    # print(artistGraph.load_graph("TestingSongs"))
     # print(artistGraph.search_artist("Mariah Carey"))
-    print("number of main artists: " + str(artistGraph.artist))
-    print("number of repeated main artists : " + str(artistGraph.repArt))
-    print("number of neighbors: " + str(artistGraph.nb0))
-    print("number of repeated neighbors: " + str(artistGraph.repNb))

@@ -1,8 +1,8 @@
 class Vertex:
     def __init__(self, artist):
         self.id = artist
-        self.songs = []
-        self.coArtists = {}  # the coArtists are going to be stored in a dictionary
+        self.songs = [] # songs the artists wrote, or was part of
+        self.coArtists = {}  # the coArtists are going to be stored in a array
 
     # Adds song to the vertex array's of songs
     def addSong(self, song):
@@ -16,7 +16,7 @@ class Vertex:
             self.coArtists[nbr] = 1
 
     def __str__(self):
-        return str(self.id)# + ' connectedTo: ' + str([x.id for x in self.coArtists])
+        return str(self.id) + ' connectedTo: ' + str([x.id for x in self.coArtists])
 
     def getConnections(self):
         return self.coArtists.keys()
@@ -31,6 +31,9 @@ class Graph:
     def __init__(self):
         self.vertList = {}
         self.numVertices = 0
+
+    def getNVertices(self):
+        return self.numVertices
 
     def addVertex(self,key):
         self.numVertices += 1

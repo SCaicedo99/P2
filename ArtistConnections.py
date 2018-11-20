@@ -57,7 +57,7 @@ class ArtistConnections:
                 nB = self.vertList.addVertex(nB)
                 self.nb0 += 1  # this adds 1 per new new neighbor, or coArtist
                 self.numVertices += 1
-            nB.addSong(song)
+            # nB.addSong(song)
 
         # insert the record to graph
 
@@ -145,4 +145,4 @@ if __name__ == '__main__':
 
     print(artistGraph.load_graph("TenKsongs_proj2"))
     # print(artistGraph.load_graph("TestingSongs"))
-    # print(artistGraph.search_artist("Mariah Carey"))
+    print(artistGraph.search_artist("Mariah Carey"))

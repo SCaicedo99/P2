@@ -1,5 +1,5 @@
 import random
-from Project2.Graph import Vertex
+from P2.Graph import Vertex
 
 class ArtistConnections:
 
@@ -16,42 +16,43 @@ class ArtistConnections:
     def load_graph(self, songLibaray):
         ## load the lines from the file
 
-        file = open(songLibaray, 'r') # Opening the 
+        with open(songLibaray, 'r') as file:
+            lineArray = file.readlines() # creating a new array with each song as 1 line, or 1 element of the array
 
-        lineArray = file.readline()
+            for line in lineArray:
+                ### parse the songRecord and insert into the graph
+                self.insertRecord(line) # Adding each song to the graph
 
-        for line in lineArray:
-            ### parse the songRecord and insert into the graph
-            self.InsertRecord(line)
+        file.close()  # close open file
 
         return self.numVertices
-"""
-This function inserts the record into the graph ( TA's implementation)
-"""
-    def inserRecord(self,record):
+
+
+    #This function inserts the record into the graph
+
+    def insertRecord(self,record):
         # parse the string
 
         tokens = record.split(',')
 
         song = tokens[1]
         artist = tokens[2]
-        neighbors = tokens[5].split(';') #
+        neighbors = tokens[5].split(';') # This is splitting each of the artists in the song
 
-        ### insert the record to hraph
+        ### insert the record to graph
 
         # insert vertex for this artist
-        currentVert = None
 
         if artist in self.vertList:
-            nbVert = None
             currentVert = self.vertList[artist]
         else:
-            currentVert = Vertex(artist)
+            currentVert = self.vertList[artist] = (Vertex(artist))
+            self.numVertices += 1
 
         ## insert info for this artist
 
-        currentVert.addSong(song)
-        for nb in neighbors:
+        currentVert.addSong(song)  # Inserts song for the current Vertex
+        for nb in neighbors: # Adds each of the coArtists to the current vertex
             currentVert.addNeighbor(nb)
     """
     Return song libary information
@@ -121,6 +122,5 @@ This function inserts the record into the graph ( TA's implementation)
 if __name__ == '__main__':
     artistGraph = ArtistConnections()
 
-    ArtistConnections.generate_data("TenKsongs_proj2.csv")
-
-    print("Hello  world")
+    # print(artistGraph.load_graph("TenKsongs_proj2"))
+    print(artistGraph.load_graph("TestingSongs"))

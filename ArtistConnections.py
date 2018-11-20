@@ -6,6 +6,7 @@ class ArtistConnections:
     def __init__(self):
         self.vertList = {}
         self.numVertices = 0
+        self.nb0 = 0
 
     """
     Load the artist connections graph based on a given song database
@@ -38,7 +39,8 @@ class ArtistConnections:
 
         song = tokens[1]
         artist = tokens[2]
-        neighbors = tokens[5].split(';')  # This is splitting each of the artists in the song
+        neighbors = tokens[5].split(';')  # This is splitting each of the coArtists in the song
+
 
         # insert the record to graph
 
@@ -70,7 +72,7 @@ class ArtistConnections:
 
     def search_artist(self, artist_name):
         numSongs = len(self.vertList[artist_name].songs);
-        artistLst = self.vertList[artist_name].getConnections
+        artistLst = self.vertList[artist_name].getConnections()
 
         # for key in [self.vertList[artist_name].coArtists]:
         #     artistLst.append(key)
@@ -125,3 +127,4 @@ if __name__ == '__main__':
     # print(artistGraph.load_graph("TenKsongs_proj2"))
     print(artistGraph.load_graph("TestingSongs"))
     print(artistGraph.search_artist("Mariah Carey"))
+    print(artistGraph.nb0)

@@ -122,3 +122,5 @@ if __name__ == '__main__':
     artistGraph = ArtistConnections()
 
     ArtistConnections.generate_data("TenKsongs_proj2.csv")
+
+    print("Hello  world")

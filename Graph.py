@@ -2,13 +2,13 @@ class Vertex:
     def __init__(self, artist):
         self.id = artist
         self.songs = []
-        self.coArtists = {} # the coArtists are going to be stored in a dictionary
+        self.coArtists = {}  # the coArtists are going to be stored in a dictionary
 
-    # This function was added by the TA
+    # Adds song to the vertex array's of songs
     def addSong(self, song):
         self.songs.append(song)
 
-    # this function was altered, weight was deleted
+    # Adds the coArtists of the vertex
     def addNeighbor(self, nbr):
         if nbr in self.coArtists:
             self.coArtists[nbr] += 1

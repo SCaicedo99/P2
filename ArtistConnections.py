@@ -30,16 +30,17 @@ class ArtistConnections:
 
     #This function inserts the record into the graph
 
-    def insertRecord(self,record):
+    def insertRecord(self, record):
         # parse the string
 
+        record = record[:len(record)-1]  # This line gets rid of the \n
         tokens = record.split(',')
 
         song = tokens[1]
         artist = tokens[2]
-        neighbors = tokens[5].split(';') # This is splitting each of the artists in the song
+        neighbors = tokens[5].split(';')  # This is splitting each of the artists in the song
 
-        ### insert the record to graph
+        # insert the record to graph
 
         # insert vertex for this artist
 
@@ -52,7 +53,7 @@ class ArtistConnections:
         ## insert info for this artist
 
         currentVert.addSong(song)  # Inserts song for the current Vertex
-        for nb in neighbors: # Adds each of the coArtists to the current vertex
+        for nb in neighbors:  # Adds each of the coArtists to the current vertex
             currentVert.addNeighbor(nb)
     """
     Return song libary information
@@ -68,12 +69,11 @@ class ArtistConnections:
     """
 
     def search_artist(self, artist_name):
-        numSongs = 0;
-        artistLst = []
+        numSongs = len(self.vertList[artist_name].songs);
+        artistLst = self.vertList[artist_name].getConnections
 
-        #
-        # Write your code here
-        #
+        # for key in [self.vertList[artist_name].coArtists]:
+        #     artistLst.append(key)
 
         return numSongs, artistLst
 
@@ -81,7 +81,7 @@ class ArtistConnections:
     Return a list of two-hop neighbors of a given artist
     """
 
-    def find_new_friends(self):
+    def find_new_friends(self, artist_name):
         two_hop_friends = []
 
         #
@@ -124,3 +124,4 @@ if __name__ == '__main__':
 
     # print(artistGraph.load_graph("TenKsongs_proj2"))
     print(artistGraph.load_graph("TestingSongs"))
+    print(artistGraph.search_artist("Mariah Carey"))

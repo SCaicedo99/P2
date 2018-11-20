@@ -47,6 +47,9 @@ class Graph:
         else:
             return None
 
+    def __getitem__(self, item):
+        return self.getVertex(item)
+
     def __contains__(self,n):
         return n in self.vertList
 

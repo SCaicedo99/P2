@@ -1,14 +1,14 @@
 class Vertex:
     def __init__(self, artist):
         self.id = artist
-        self.songs = []
-        self.coArtists = {} # the coArtists are going to be stored in a dictionary
+        self.songs = [] # songs the artists wrote, or was part of
+        self.coArtists = {}  # the coArtists are going to be stored in a array
 
-    # This function was added by the TA
+    # Adds song to the vertex array's of songs
     def addSong(self, song):
         self.songs.append(song)
 
-    # this function was altered, weight was deleted
+    # Adds the coArtists of the vertex
     def addNeighbor(self, nbr):
         if nbr in self.coArtists:
             self.coArtists[nbr] += 1
@@ -16,7 +16,7 @@ class Vertex:
             self.coArtists[nbr] = 1
 
     def __str__(self):
-        return str(self.id) + ' connectedTo: ' + str([x.id for x in self.coArtists])
+        return str(self.id) + ' connectedTo: ' + str([x for x in self.coArtists])
 
     def getConnections(self):
         return self.coArtists.keys()
@@ -32,8 +32,11 @@ class Graph:
         self.vertList = {}
         self.numVertices = 0
 
+    def getNVertices(self):
+        return self.numVertices
+
     def addVertex(self,key):
-        self.numVertices = self.numVertices + 1
+        self.numVertices += 1
         newVertex = Vertex(key)
         self.vertList[key] = newVertex
         return newVertex
@@ -43,6 +46,9 @@ class Graph:
             return self.vertList[n]
         else:
             return None
+
+    def __getitem__(self, item):
+        return self.getVertex(item)
 
     def __contains__(self,n):
         return n in self.vertList

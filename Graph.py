@@ -31,9 +31,14 @@ class Graph:
     def __init__(self):
         self.vertList = {}
         self.numVertices = 0
+        self.values = {}
 
     def getNVertices(self):
         return self.numVertices
+
+    def setV(self):
+        for artist in self.vertList.values():
+            self.values = {**artist.coArtists, **self.values}
 
     def addVertex(self,key):
         self.numVertices += 1

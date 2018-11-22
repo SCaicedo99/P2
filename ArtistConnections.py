@@ -33,6 +33,8 @@ class ArtistConnections:
 
         file.close()  # close open file
 
+        self.vertList.setV() # This function sets the values in the graph
+
         return self.numVertices
 
 

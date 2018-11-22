@@ -16,7 +16,7 @@ class Vertex:
             self.coArtists[nbr] = 1
 
     def __str__(self):
-        return str(self.id) + ' connectedTo: ' + str([x for x in self.coArtists])
+        return str(self.id)# + ' connectedTo: ' + str([x for x in self.coArtists])
 
     def getConnections(self):
         return self.coArtists.keys()
@@ -31,14 +31,6 @@ class Graph:
     def __init__(self):
         self.vertList = {}
         self.numVertices = 0
-        self.values = {}
-
-    def getNVertices(self):
-        return self.numVertices
-
-    def setV(self):
-        for artist in self.vertList.values():
-            self.values = {**artist.coArtists, **self.values}
 
     def addVertex(self,key):
         self.numVertices += 1

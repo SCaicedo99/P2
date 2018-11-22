@@ -4,8 +4,7 @@ from Graph import Vertex, Graph
 class ArtistConnections:
 
     def __init__(self):
-        self.vertList = Graph()
-        # self.vertList = {}
+        self.vertList = {}
         self.numVertices = 0
         self.nb0 = 0
         self.artist = 0
@@ -32,9 +31,6 @@ class ArtistConnections:
                 self.insertRecord(line) # Adding each song to the graph
 
         file.close()  # close open file
-
-        self.vertList.setV() # This function sets the values in the graph
-
         return self.numVertices
 
 
@@ -53,21 +49,16 @@ class ArtistConnections:
         # this for loop should create a vertex for each of the neighbors that are not already in the vertList
         for nB in neighbors:
             if nB in self.vertList:
-                nB = self.vertList.getVertex(nB)
-                # nB = self.vertList[nB]
-            #     nB = self.vertList[nB] = Vertex(nB)
-                nB.addNeighbor(artist)
-
-                # nB.addSong(song)
+                nB = self.vertList[nB] # USING DICTIONARY
                 self.repNb += 1  # this should add 1 per repeated neighbor, for testing purposes
+
             else:  # if the coArtists doesn't exist already in the self.vertList, then add a new vertex
-                nB = self.vertList.addVertex(nB)
-                # nB = self.vertList[nB] = Vertex(nB)
-                # nB = self.vertList[nB]
-                nB.addNeighbor(artist)
+                nB = self.insertToGraph(nB)
                 self.nb0 += 1  # this adds 1 per new new neighbor, or coArtist
                 self.numVertices += 1
-                # nB.addSong(song)
+
+            # nB.addSong(song) # TODO COMMENT THIS OUT BEFORE SUBMITTING
+            nB.addNeighbor(artist)
 
 
         # insert the record to graph
@@ -75,21 +66,26 @@ class ArtistConnections:
         # insert vertex for this artist
 
         if artist in self.vertList:  # this checks if the main artist already exists in the vertList
-            currentVert = self.vertList.getVertex(artist)
-            # currentVert = self.vertList[artist]
+            currentVert = self.vertList[artist]
 
             self.repArt += 1  # this should add 1 for repeated main Artists, for testing purposes
         else:
-            currentVert = self.vertList.addVertex(artist)
-            # currentVert = self.vertList[artist] = Vertex(artist)
+            currentVert = self.insertToGraph(artist) # making a new artist vertex
             self.artist += 1  # add 1 to the number of main artist.
             self.numVertices += 1
 
         ## insert info for this artist
 
         currentVert.addSong(song)  # Inserts song for the current Vertex
+
         for nb in neighbors:  # Adds each of the coArtists to the current vertex
             currentVert.addNeighbor(nb)
+
+    def insertToGraph(self, artist): # This method creates a new vertex for an artist only if the artist does not have a vertex yet, and returns the vertex
+        if artist not in self.vertList:
+            self.vertList[artist] = Vertex(artist)
+        return self.vertList[artist]
+
     """
     Return song libary information
     """
@@ -97,17 +93,25 @@ class ArtistConnections:
     def graph_info(self):
         return "Vertex Size: " + str(self.numVertices)
 
+    def searchSong(self, item):  # this method given a song will return all the artists involved, just for testing purposes
+        result = []
+        for artist in self.vertList:
+            for song in self.vertList[artist].songs:
+                if song == item:
+                    result.append(artist)
+
+        return result
+
+    def getVertices(self):
+        result = 0
+        for vertex in self.vertList:
+            result += len(self.vertList[vertex].coArtists)
+        return result
     """
     Search the information of an artist based on the artist name
     Return a tuple (the number of songs he/she wrote, the collaborative artist list)
 
     """
-    def getVertices(self):
-        result = 0
-        for vertex in self.vertList:
-            result += len(vertex.coArtists)
-        return result
-
     def search_artist(self, artist_name):
         numSongs = len(self.vertList[artist_name].songs)
         artistLst = self.vertList[artist_name].getConnections()
@@ -161,13 +165,15 @@ if __name__ == '__main__':
 
     print(artistGraph.load_graph("TenKsongs_proj2"))
     # print("number of vertices: "+str(artistGraph.load_graph("TestingSongs")))
-    print(artistGraph.search_artist("Mariah Carey"))
+    # print(artistGraph.search_artist("Mariah Carey"))
     print("number of edges is: " + str(artistGraph.getVertices()))
     # print(artistGraph.vertList.values())
-    # print("number of main artists: " + str(artistGraph.artist))
-    # print("number of repeated main artists : " + str(artistGraph.repArt))
-    # print("number of neighbors: " + str(artistGraph.nb0))
-    # print("number of repeated neighbors: " + str(artistGraph.repNb))
+    print("number of main artists: " + str(artistGraph.artist))
+    print("number of repeated main artists : " + str(artistGraph.repArt))
+    print("number of neighbors: " + str(artistGraph.nb0))
+    print("number of repeated neighbors: " + str(artistGraph.repNb))
+    print("artists involved in song: " + str(artistGraph.searchSong("")))
+    print(len(artistGraph.searchSong("")))
     # print("these are the keys: ")
     # for keys in artistGraph.vertList:
     #     print(keys)

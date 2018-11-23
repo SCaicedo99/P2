@@ -126,31 +126,19 @@ class ArtistConnections:
         two_hop_friends = []
         artist_name_Vertex = self.vertList[artist_name]
         artist_name_coArtists = artist_name_Vertex.coArtists.keys() # array with coArtists of the given artist
-        iterfor1 = 0
-        iterfor2 = 0
-        iterfor3 = 0
-        # for coArtists in artist_name_coArtists: # This line iterates through all the coArtists in artist_name Vertex
-        #     iterfor1 += 1
-        #     currCoArtist = self.vertList[coArtists].coArtists.keys() # Current coArtist vertex
-        #     for nb in currCoArtist: # This iterates through the neighbors of the current coArtist
-        #         iterfor2 += 1
-        #         nbVertex_Keys = self.vertList[nb].coArtists.keys()
-        #         if nb != artist_name:
-        #             for nbOFnb in nbVertex_Keys: # This iterates through the neighbors of the neighbors of current coArtist
-        #                 iterfor3 += 1
-        #                 if artist_name not in self.vertList[nbOFnb].coArtists and nbOFnb not in two_hop_friends:
-        #                     two_hop_friends.append(nbOFnb)
-        for firstNb in artist_name_coArtists:
-            firstNbKeys = self.vertList[firstNb].coArtists.keys()
+
+        for firstNb in artist_name_coArtists: # Iterating through the array of coArtists of the given artist
+            firstNbKeys = self.vertList[firstNb].coArtists.keys() # array with the coArtists of the current neigbor
             for secondNb in firstNbKeys:
-                secondNbKeys = self.vertList[secondNb].coArtists.keys()
-                for friends in secondNbKeys:
-                    if friends not in artist_name_coArtists and artist_name not in self.vertList[friends].coArtists.keys() and friends != artist_name:
-                        two_hop_friends.append(friends)
+                if secondNb == artist_name: # If found the given artist just continue into the next iteration
+                    continue
+                # This is the condition that must be met in order for the artist to be added to the array
+                # Basically if the secondNb's coArtist does not contain the given artist, and if not already in the array
+                # then add it.
+                elif artist_name not in self.vertList[secondNb].coArtists and secondNb not in two_hop_friends:
+                    two_hop_friends.append(secondNb)
+
         two_hop_friends.sort() # sorts list before returning it
-        print("first loop " + str(iterfor1))
-        print("second loop " + str(iterfor2))
-        print("third  loop " + str(iterfor3))
 
         return two_hop_friends
 
@@ -205,6 +193,6 @@ if __name__ == '__main__':
     y = artistGraph.find_new_friends("Mariah Carey")
     print("Two how neighbors: " + str(y))
     print("Length of the two neighbor array: " +str(len(y)))
-    print(artistGraph.vertList["Mariah Carey"])
+    # print(artistGraph.vertList["Mariah Carey"])
     correct = ['A Tundra', 'Aaron Watson', 'Aftermath', 'Al Duvall', 'Alex', 'Alfredo Guti\xc3\xa9rrez', 'Alkonost', 'Angels', 'Arthur Brown', 'Asterisk*', 'Atman', 'Azukx', 'Becky Baeling', 'Beenie Man', 'Birdapres', 'Bitter End', 'Bobby Darin', 'Bobby Hutcherson', 'Bounty Killer', 'Brian Littrell', 'Busdriver', 'C.L. Smooth', 'Circle Jerks', 'Claire Hamill', 'Commander Cody And His Lost Planet Airman', 'Criminal Class USA is Hush Hush Revolution', 'Curtis', "D'Molls", 'DJ Dips', 'DJ Phiene', 'Dale Hawkins', 'Deathstar', 'Deep Blue Something', 'Del Tha Funkee Homosapien', 'Don Davis', 'Double Image', 'Eastmountainsouth', 'Edgar Bori', 'Eno', 'Enrique Iglesias', 'Equilibrium', 'Erick Sermon', 'Eyes Cream', 'Fake Problems', 'Fortitude', 'Foxy Brown', 'Frank Ifield', 'GG Allin', 'Hassan Annouri feat. Cassandra Steen', 'Ice', 'JC Lodge', 'Jaguares', 'Jeff & Sheri Easter', 'Jenney', 'Joe Heaney', 'Jorge Alfano', 'Jo\xc3\xa3o Gilberto', 'Justin', 'KT Tunstall', 'Kardinal Offishall / Keri Hilson', 'Kati', 'La Charanga Rubalcaba', 'La Divina Pastora', 'Len Barry', 'Les Rythmes Digitales feat. Nik Kershaw', 'Less Than Jake', 'Lily Allen Featuring Ours', 'Livingston Taylor', 'Malefaction', 'Mance Lipscomb', 'Maria Callas/Gianni Raimondi/Gabriella Carturan/Plinio Clabassi/Nicola Rossi-Lemeni/Coro del Teatro alla Scala_ Milano/Noberto Mola/Orchestra del Teatro alla Scala_ Milano/Gianandrea Gavazzeni', 'Markus', 'Marty Robbins', 'Matisyahu', 'Michael English', 'Michael McDonald', 'Mick Clarke', 'Migraine', "Mike Jones (Featuring CJ_ Mello & Lil' Bran)", 'Mindless Self Indulgence', 'Monster Magnet', 'Monty Are I', 'Mudhoney', 'Mystic Revelation of Rastafari', 'Norman Howard', 'Obie Bermudez', 'Olive', 'Out Of The Grey', 'Pelt', 'Peret', 'Poptart Monkeys', 'Pyranja', 'Ricky Martin Feat. La Mari de "Chambao', 'Ruffneck', 'RyanDan', 'SUMO', 'Samba Mapangala and Orchestra Virunga', 'Seal', 'Sergio Dalma', 'Shakira Featuring Wyclef Jean', 'Skeeter Davis', 'Solistiyhtye Suomi', 'Spunk', 'State of Chaos', 'Strata', 'Sukhbir', 'Super700', 'The Black Crowes', 'The Clark Sisters', 'The Doors', 'The Frantic', 'The Knightsbridge Strings', 'The London Pops Orchestra', 'The Monroes', 'The Nightraver & The Magican', 'The Panic Channel', 'The Sex Pistols', 'The Token', 'Tito Puent\xc3\xa9', 'Tom Collier', 'Tranzas', 'Trick Trick / Obie Trice', 'Tum Tum / Double T / LiL Ronnie', 'Uman', 'Urge Overkill', 'Wilshire', 'Winifred Phillips', 'YZ']
     print("The right # of neigbor should be: " +str(len(correct)))

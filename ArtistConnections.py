@@ -102,7 +102,7 @@ class ArtistConnections:
 
         return result
 
-    def getVertices(self):
+    def getEdges(self):
         result = 0
         for vertex in self.vertList:
             result += len(self.vertList[vertex].coArtists)
@@ -133,12 +133,12 @@ class ArtistConnections:
                 if secondNb == artist_name: # If found the given artist just continue into the next iteration
                     continue
                 # This is the condition that must be met in order for the artist to be added to the array
-                # Basically if the secondNb's coArtist does not contain the given artist, and if not already in the array
-                # then add it.
+                # Basically if the secondNb's coArtist does not contain the given artist, and if not already in the
+                # array, then add it.
                 elif artist_name not in self.vertList[secondNb].coArtists and secondNb not in two_hop_friends:
                     two_hop_friends.append(secondNb)
 
-        two_hop_friends.sort() # sorts list before returning it
+        two_hop_friends.sort()  # sorts list before returning it
 
         return two_hop_friends
 
@@ -150,10 +150,18 @@ class ArtistConnections:
     def recommend_new_collaborator(self, artist_name):
         artist = ""
         numSongs = 0
+        artist_name_Vertex = self.vertList[artist] # verex of given artist
+        artist_name_coArtists = artist_name_Vertex.coArtists.keys() # array of str
+        possibleMatches = self.find_new_friends(artist_name) # array of str
 
-        #
-        # Write your code here
-        #
+        for coArt in artist_name_coArtists:
+            for nbOFnb in possibleMatches:
+                if nbOFnb in self.vertList[coArt].coArtists.keys():
+                    weight = self.vertList[coArt].coArtists[nbOFnb] \
+                             + artist_name_Vertex.coArtists[coArt]
+                    if weight >= numSongs:
+                        artist = nbOFnb
+                        numSongs = weight
 
         return artist, numSongs
 
@@ -178,7 +186,7 @@ if __name__ == '__main__':
     print("number of vertices: " + str(artistGraph.load_graph("TenKsongs_proj2")))
     # print("number of vertices: "+str(artistGraph.load_graph("TestingSongs")))
     # print(artistGraph.search_artist("Mariah Carey"))
-    # print("number of edges is: " + str(artistGraph.getVertices()))
+    print("number of edges is: " + str(artistGraph.getEdges()))
     # print(artistGraph.vertList.values())
     # print("number of main artists: " + str(artistGraph.artist))
     # print("number of repeated main artists : " + str(artistGraph.repArt))
@@ -190,9 +198,9 @@ if __name__ == '__main__':
     # for keys in artistGraph.vertList:
     #     print(keys)
     # print("neighbors for leon: " + str(artistGraph.vertList["Leon Lai"]))
-    y = artistGraph.find_new_friends("Mariah Carey")
-    print("Two how neighbors: " + str(y))
-    print("Length of the two neighbor array: " +str(len(y)))
+    # y = artistGraph.find_new_friends("Mariah Carey") # Testing two hop friends
+    # print("Two how neighbors: " + str(y)) # Testing two hop friends
+    # print("Length of the two neighbor array: " +str(len(y))) # Testing two hop friends
     # print(artistGraph.vertList["Mariah Carey"])
-    correct = ['A Tundra', 'Aaron Watson', 'Aftermath', 'Al Duvall', 'Alex', 'Alfredo Guti\xc3\xa9rrez', 'Alkonost', 'Angels', 'Arthur Brown', 'Asterisk*', 'Atman', 'Azukx', 'Becky Baeling', 'Beenie Man', 'Birdapres', 'Bitter End', 'Bobby Darin', 'Bobby Hutcherson', 'Bounty Killer', 'Brian Littrell', 'Busdriver', 'C.L. Smooth', 'Circle Jerks', 'Claire Hamill', 'Commander Cody And His Lost Planet Airman', 'Criminal Class USA is Hush Hush Revolution', 'Curtis', "D'Molls", 'DJ Dips', 'DJ Phiene', 'Dale Hawkins', 'Deathstar', 'Deep Blue Something', 'Del Tha Funkee Homosapien', 'Don Davis', 'Double Image', 'Eastmountainsouth', 'Edgar Bori', 'Eno', 'Enrique Iglesias', 'Equilibrium', 'Erick Sermon', 'Eyes Cream', 'Fake Problems', 'Fortitude', 'Foxy Brown', 'Frank Ifield', 'GG Allin', 'Hassan Annouri feat. Cassandra Steen', 'Ice', 'JC Lodge', 'Jaguares', 'Jeff & Sheri Easter', 'Jenney', 'Joe Heaney', 'Jorge Alfano', 'Jo\xc3\xa3o Gilberto', 'Justin', 'KT Tunstall', 'Kardinal Offishall / Keri Hilson', 'Kati', 'La Charanga Rubalcaba', 'La Divina Pastora', 'Len Barry', 'Les Rythmes Digitales feat. Nik Kershaw', 'Less Than Jake', 'Lily Allen Featuring Ours', 'Livingston Taylor', 'Malefaction', 'Mance Lipscomb', 'Maria Callas/Gianni Raimondi/Gabriella Carturan/Plinio Clabassi/Nicola Rossi-Lemeni/Coro del Teatro alla Scala_ Milano/Noberto Mola/Orchestra del Teatro alla Scala_ Milano/Gianandrea Gavazzeni', 'Markus', 'Marty Robbins', 'Matisyahu', 'Michael English', 'Michael McDonald', 'Mick Clarke', 'Migraine', "Mike Jones (Featuring CJ_ Mello & Lil' Bran)", 'Mindless Self Indulgence', 'Monster Magnet', 'Monty Are I', 'Mudhoney', 'Mystic Revelation of Rastafari', 'Norman Howard', 'Obie Bermudez', 'Olive', 'Out Of The Grey', 'Pelt', 'Peret', 'Poptart Monkeys', 'Pyranja', 'Ricky Martin Feat. La Mari de "Chambao', 'Ruffneck', 'RyanDan', 'SUMO', 'Samba Mapangala and Orchestra Virunga', 'Seal', 'Sergio Dalma', 'Shakira Featuring Wyclef Jean', 'Skeeter Davis', 'Solistiyhtye Suomi', 'Spunk', 'State of Chaos', 'Strata', 'Sukhbir', 'Super700', 'The Black Crowes', 'The Clark Sisters', 'The Doors', 'The Frantic', 'The Knightsbridge Strings', 'The London Pops Orchestra', 'The Monroes', 'The Nightraver & The Magican', 'The Panic Channel', 'The Sex Pistols', 'The Token', 'Tito Puent\xc3\xa9', 'Tom Collier', 'Tranzas', 'Trick Trick / Obie Trice', 'Tum Tum / Double T / LiL Ronnie', 'Uman', 'Urge Overkill', 'Wilshire', 'Winifred Phillips', 'YZ']
-    print("The right # of neigbor should be: " +str(len(correct)))
+    print("Testing new collaborator using Mariah Carey, I should get Seal, 15")
+    print(artistGraph.recommend_new_collaborator("Mariah Carey"))

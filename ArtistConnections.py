@@ -146,6 +146,12 @@ class ArtistConnections:
     Search the information of an artist based on the artist name
 
     """
+    def totalW(self):
+        weight = 0
+        for vertex in self.vertList.keys():
+            weight += sum(self.vertList[vertex].coArtists.values())
+        # this compares and returns the difference between the sum of all the edges and the "correct amount"
+        return weight - 191394
 
     def recommend_new_collaborator(self, artist_name):
         artist = ""
@@ -202,5 +208,6 @@ if __name__ == '__main__':
     # print("Two how neighbors: " + str(y)) # Testing two hop friends
     # print("Length of the two neighbor array: " +str(len(y))) # Testing two hop friends
     # print(artistGraph.vertList["Mariah Carey"])
-    print("Testing new collaborator using Mariah Carey, I should get Seal, 15")
-    print(artistGraph.recommend_new_collaborator("Mariah Carey"))
+    print("Testing new collaborator using Mariah Carey, I should get Seal, 15")  # Testing new collaborator
+    print(artistGraph.recommend_new_collaborator("Mariah Carey"))  # Testing new collaborator
+    print("Total weights from the edges: " + str(artistGraph.totalW())) # Testing the total weight, should be 0

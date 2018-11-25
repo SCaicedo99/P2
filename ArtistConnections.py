@@ -160,12 +160,16 @@ class ArtistConnections:
         artist_name_coArtists = artist_name_Vertex.coArtists.keys() # array of str
         possibleMatches = self.find_new_friends(artist_name) # array of str
 
+        # artist name => AA, AA => BB, return BB and artist name + AA
+
         for coArt in artist_name_coArtists:
             for nbOFnb in possibleMatches:
-                if nbOFnb in self.vertList[coArt].coArtists.keys():
+                if coArt in self.vertList[nbOFnb].coArtists:
                     weight = self.vertList[coArt].coArtists[nbOFnb] \
                              + artist_name_Vertex.coArtists[coArt]
                     if weight >= numSongs:
+                        print('Current neighbor weight: '+str(artist_name_Vertex.coArtists[coArt]))
+                        print('Current nbOFnb weight: '+str(self.vertList[coArt].coArtists[nbOFnb]))
                         artist = nbOFnb
                         numSongs = weight
 
@@ -210,4 +214,4 @@ if __name__ == '__main__':
     # print(artistGraph.vertList["Mariah Carey"])
     print("Testing new collaborator using Mariah Carey, I should get Seal, 15")  # Testing new collaborator
     print(artistGraph.recommend_new_collaborator("Mariah Carey"))  # Testing new collaborator
-    print("Total weights from the edges: " + str(artistGraph.totalW())) # Testing the total weight, should be 0
+    print("Difference in weights from the edges: " + str(artistGraph.totalW())) # Testing the total weight, should be 0

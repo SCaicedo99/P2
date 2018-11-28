@@ -10,10 +10,11 @@ class Vertex:
 
     # Adds the coArtists of the vertex
     def addNeighbor(self, nbr):
-        if nbr in self.coArtists:
-            self.coArtists[nbr] += 1
-        else:
-            self.coArtists[nbr] = 1
+         if nbr != self.getId():  # Checking if the nb to be added is the vertex, ignore it if it is
+            if nbr in self.coArtists:
+                self.coArtists[nbr] += 1
+            else:
+                self.coArtists[nbr] = 1
 
     def __str__(self):
         return str(self.id) + ' connectedTo: ' + str([x for x in self.coArtists])

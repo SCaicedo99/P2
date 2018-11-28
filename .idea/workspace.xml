@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31faa43e-3e42-41ee-85de-bc172925f276" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ArtistConnections.py" beforeDir="false" afterPath="$PROJECT_DIR$/ArtistConnections.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graph.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,37 +16,38 @@
     <session id="-676787035">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.0" value="3" />
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.0" value="4" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="TenKSongs_proj2" value="1" />
-          <entry key="py" value="8" />
+          <entry key="py" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="7" />
-          <entry key="Scratch" value="1" />
+          <entry key="Python" value="10" />
+          <entry key="Scratch" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2277" />
+          <entry key="py" value="6295" />
           <entry key="txt" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="1797" />
-          <entry key="Scratch" value="480" />
+          <entry key="Python" value="5732" />
+          <entry key="Scratch" value="563" />
         </counts>
       </usages-collector>
     </session>
@@ -53,35 +56,11 @@
     <favorites_list name="P2" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.58625245">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/ArtistConnections.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="299">
-                  <caret line="159" selection-start-line="159" selection-end-line="159" />
-                  <folding>
-                    <element signature="e#0#13#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-                  <folding>
-                    <element signature="e#0#13#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Graph.py">
               <provider selected="true" editor-type-id="text-editor" />
             </entry>
           </file>
@@ -89,11 +68,23 @@
       </split-first>
       <split-second>
         <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ArtistConnections.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="276">
+                  <caret line="164" column="25" selection-start-line="164" selection-start-column="25" selection-end-line="164" selection-end-column="25" />
+                  <folding>
+                    <element signature="e#0#13#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Graph.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="125">
-                  <caret line="33" selection-start-line="33" selection-end-line="33" />
+                <state relative-caret-position="-816">
+                  <caret line="12" column="100" selection-start-line="12" selection-start-column="100" selection-end-line="12" selection-end-column="100" />
                 </state>
               </provider>
             </entry>
@@ -102,9 +93,18 @@
       </split-second>
     </splitter>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>mariah</find>
+      <find>Asleep At The Wheel</find>
+      <find>Seal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -114,16 +114,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Graph.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/Dajkstra.py" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+        <option value="$PROJECT_DIR$/Graph.py" />
         <option value="$PROJECT_DIR$/ArtistConnections.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-10" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="655" />
+    <option name="y" value="-24" />
     <option name="width" value="980" />
-    <option name="height" value="1040" />
+    <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager">
     <OptionsSetting value="false" id="Update" />
@@ -133,6 +135,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="P2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -153,22 +166,11 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="P2" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Git" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/241/241 - Shortcut.lnk" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -267,16 +269,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992908" visible="true" weight="0.24983476" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992908" weight="0.23453094" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.50070924" side_tool="true" weight="0.24983476" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49966952" weight="0.32907802" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.44822696" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49966952" visible="true" weight="0.29503545" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.33475178" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
@@ -300,14 +302,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py</url>
-          <line>12</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/ArtistConnections.py</url>
-          <line>156</line>
-          <option name="timeStamp" value="2" />
+          <line>160</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -316,28 +313,29 @@
     <entry file="file://$PROJECT_DIR$/TenKSongs_proj2">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Graph.py">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/Dajkstra.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-816">
+          <caret line="12" column="100" selection-start-line="12" selection-start-column="100" selection-end-line="12" selection-end-column="100" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ArtistConnections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="159" selection-start-line="159" selection-end-line="159" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

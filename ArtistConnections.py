@@ -1,15 +1,11 @@
-import random
-from Graph import Vertex, Graph
+from Graph import Vertex
 
 class ArtistConnections:
 
     def __init__(self):
         self.vertList = {}
         self.numVertices = 0
-        self.nb0 = 0
-        self.artist = 0
-        self.repArt = 0
-        self.repNb = 0
+
 
     """
     Load the artist connections graph based on a given song database
@@ -38,7 +34,6 @@ class ArtistConnections:
 
     def insertRecord(self, record):
         # parse the string
-
         record = record[:len(record)-1]  # This line gets rid of the \n
         tokens = record.split(',')
 
@@ -48,30 +43,20 @@ class ArtistConnections:
 
         # this for loop should create a vertex for each of the neighbors that are not already in the vertList
         for nB in neighbors:
-            if nB in self.vertList:
+            if nB in self.vertList.keys():
                 nB = self.vertList[nB] # USING DICTIONARY
-                self.repNb += 1  # this should add 1 per repeated neighbor, for testing purposes
-
             else:  # if the coArtists doesn't exist already in the self.vertList, then add a new vertex
                 nB = self.insertToGraph(nB)
-                self.nb0 += 1  # this adds 1 per new new neighbor, or coArtist
                 self.numVertices += 1
-
-            # nB.addSong(song) # TODO COMMENT THIS OUT BEFORE SUBMITTING
-            nB.addNeighbor(artist)
-
+            nB.addNeighbor(artist) # Adds to the current nB's coArtists dictionary
 
         # insert the record to graph
-
         # insert vertex for this artist
 
-        if artist in self.vertList:  # this checks if the main artist already exists in the vertList
+        if artist in self.vertList.keys():  # this checks if the main artist already exists in the vertList
             currentVert = self.vertList[artist]
-
-            self.repArt += 1  # this should add 1 for repeated main Artists, for testing purposes
         else:
-            currentVert = self.insertToGraph(artist) # making a new artist vertex
-            self.artist += 1  # add 1 to the number of main artist.
+            currentVert = self.insertToGraph(artist)  # making a new artist vertex
             self.numVertices += 1
 
         ## insert info for this artist
@@ -81,8 +66,9 @@ class ArtistConnections:
         for nb in neighbors:  # Adds each of the coArtists to the current vertex
             currentVert.addNeighbor(nb)
 
-    def insertToGraph(self, artist): # This method creates a new vertex for an artist only if the artist does not have a vertex yet, and returns the vertex
-        if artist not in self.vertList:
+    # This method creates a new vertex for an artist only if the artist does not have a vertex yet, and returns the vertex
+    def insertToGraph(self, artist):
+        if artist not in self.vertList.keys():
             self.vertList[artist] = Vertex(artist)
         return self.vertList[artist]
 
@@ -93,19 +79,11 @@ class ArtistConnections:
     def graph_info(self):
         return "Vertex Size: " + str(self.numVertices)
 
-    def searchSong(self, item):  # this method given a song will return all the artists involved, just for testing purposes
-        result = []
-        for artist in self.vertList:
-            for song in self.vertList[artist].songs:
-                if song == item:
-                    result.append(artist)
-
-        return result
-
+    # Returns the number of edges in the graph, testing purposes
     def getEdges(self):
         result = 0
         for vertex in self.vertList:
-            result += len(self.vertList[vertex].coArtists)
+            result += len(self.vertList[vertex].getConnections())
         return result
     """
     Search the information of an artist based on the artist name
@@ -125,12 +103,12 @@ class ArtistConnections:
     def find_new_friends(self, artist_name):
         two_hop_friends = []
         artist_name_Vertex = self.vertList[artist_name]
-        artist_name_coArtists = artist_name_Vertex.coArtists.keys() # array with coArtists of the given artist
+        artist_name_coArtists = artist_name_Vertex.getConnections()  # array with coArtists of the given artist
 
-        for firstNb in artist_name_coArtists: # Iterating through the array of coArtists of the given artist
-            firstNbKeys = self.vertList[firstNb].coArtists.keys() # array with the coArtists of the current neigbor
+        for firstNb in artist_name_coArtists:  # Iterating through the array of coArtists of the given artist
+            firstNbKeys = self.vertList[firstNb].getConnections()  # array with the coArtists of the current neigbor
             for secondNb in firstNbKeys:
-                if secondNb == artist_name: # If found the given artist just continue into the next iteration
+                if secondNb == artist_name:  # If found the given artist just continue into the next iteration
                     continue
                 # This is the condition that must be met in order for the artist to be added to the array
                 # Basically if the secondNb's coArtist does not contain the given artist, and if not already in the
@@ -139,13 +117,13 @@ class ArtistConnections:
                     two_hop_friends.append(secondNb)
 
         two_hop_friends.sort()  # sorts list before returning it
-
         return two_hop_friends
 
     """
     Search the information of an artist based on the artist name
 
     """
+    # Checking for the weight of each of the edges in the graph, testing purposes
     def totalW(self):
         weight = 0
         for vertex in self.vertList.keys():
@@ -156,20 +134,16 @@ class ArtistConnections:
     def recommend_new_collaborator(self, artist_name):
         artist = ""
         numSongs = 0
-        artist_name_Vertex = self.vertList[artist] # verex of given artist
-        artist_name_coArtists = artist_name_Vertex.coArtists.keys() # array of str
-        possibleMatches = self.find_new_friends(artist_name) # array of str
-
-        # artist name => AA, AA => BB, return BB and artist name + AA
+        artist_name_Vertex = self.vertList[artist_name]  # vertex of given artist
+        artist_name_coArtists = artist_name_Vertex.getConnections()  # array of str
+        possibleMatches = self.find_new_friends(artist_name)  # array of str
+        # artist name => AA, AA => BB, return BB and artist name(w) + AA(w)
 
         for coArt in artist_name_coArtists:
             for nbOFnb in possibleMatches:
                 if coArt in self.vertList[nbOFnb].coArtists:
-                    weight = self.vertList[coArt].coArtists[nbOFnb] \
-                             + artist_name_Vertex.coArtists[coArt]
+                    weight = self.vertList[coArt].getWeight(nbOFnb)
                     if weight >= numSongs:
-                        print('Current neighbor weight: '+str(artist_name_Vertex.coArtists[coArt]))
-                        print('Current nbOFnb weight: '+str(self.vertList[coArt].coArtists[nbOFnb]))
                         artist = nbOFnb
                         numSongs = weight
 
@@ -182,10 +156,22 @@ class ArtistConnections:
 
     def shortest_path(self, artist_name):
         path = {}
+        coveredArtists = list() # this list will keep track of the covered artists
+        coveredArtists.append(artist_name) # Start with the given artist
+        distance = 0
+        done = False
 
-        #
-        # Write your code here
-        #
+        while not done:
+            distance += 1
+            temp = list(coveredArtists)  # creating a copy of coveredArtists
+            for artist in temp:
+                for coArt in self.vertList[artist].getConnections():
+                    if coArt not in coveredArtists: # Check if the current nb is in coveredArtists
+                        coveredArtists.append(coArt) # Add it to the list
+                        path[coArt] = distance  # And to the dictionary as well
+            if len(self.vertList.keys()) == len(coveredArtists): # Exit condition
+                done = True
+
         return path
 
 
@@ -193,10 +179,10 @@ class ArtistConnections:
 if __name__ == '__main__':
     artistGraph = ArtistConnections()
 
-    print("number of vertices: " + str(artistGraph.load_graph("TenKsongs_proj2")))
+    # print("number of vertices: " + str(artistGraph.load_graph("TenKsongs_proj2")))
     # print("number of vertices: "+str(artistGraph.load_graph("TestingSongs")))
     # print(artistGraph.search_artist("Mariah Carey"))
-    print("number of edges is: " + str(artistGraph.getEdges()))
+    # print("number of edges is: " + str(artistGraph.getEdges()))
     # print(artistGraph.vertList.values())
     # print("number of main artists: " + str(artistGraph.artist))
     # print("number of repeated main artists : " + str(artistGraph.repArt))
@@ -212,6 +198,14 @@ if __name__ == '__main__':
     # print("Two how neighbors: " + str(y)) # Testing two hop friends
     # print("Length of the two neighbor array: " +str(len(y))) # Testing two hop friends
     # print(artistGraph.vertList["Mariah Carey"])
-    print("Testing new collaborator using Mariah Carey, I should get Seal, 15")  # Testing new collaborator
-    print(artistGraph.recommend_new_collaborator("Mariah Carey"))  # Testing new collaborator
-    print("Difference in weights from the edges: " + str(artistGraph.totalW())) # Testing the total weight, should be 0
+    # print("Testing new collaborator using Mariah Carey, I should get Seal, 15")  # Testing new collaborator
+    # print(artistGraph.recommend_new_collaborator("Mariah Carey"))  # Testing new collaborator
+    # print("Difference in weights from the edges: " + str(artistGraph.totalW())) # Testing the total weight, should be 0
+    # print("Testing shortest_path")
+    # short_path = artistGraph.shortest_path('Mariah Carey')
+    # # print(short_path) # Testing shortest_path
+    # steps = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0}
+    # for value in short_path.values():
+    #     steps[value] += 1
+    #
+    # print(steps)

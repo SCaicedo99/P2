@@ -142,7 +142,8 @@ class ArtistConnections:
         for coArt in artist_name_coArtists:
             for nbOFnb in possibleMatches:
                 if coArt in self.vertList[nbOFnb].coArtists:
-                    weight = self.vertList[coArt].getWeight(nbOFnb)
+                    weight = self.vertList[coArt].getWeight(nbOFnb) + \
+                             + artist_name_Vertex.coArtists[coArt]
                     if weight >= numSongs:
                         artist = nbOFnb
                         numSongs = weight
